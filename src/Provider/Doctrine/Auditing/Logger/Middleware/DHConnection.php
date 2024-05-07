@@ -20,7 +20,7 @@ final class DHConnection extends AbstractConnectionMiddleware
         $this->DHDriver = $DHDriver;
     }
 
-    public function commit(): bool
+    public function commit(): void
     {
         $flusherList = $this->DHDriver->getFlusherList();
         foreach ($flusherList as $flusher) {
@@ -29,13 +29,13 @@ final class DHConnection extends AbstractConnectionMiddleware
 
         $this->DHDriver->resetDHFlusherList();
 
-        return parent::commit();
+        parent::commit();
     }
 
-    public function rollBack(): bool
+    public function rollBack(): void
     {
         $this->DHDriver->resetDHFlusherList();
 
-        return parent::rollBack();
+        parent::rollBack();
     }
 }
